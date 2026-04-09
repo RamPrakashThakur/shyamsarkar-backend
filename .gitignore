@@ -34,3 +34,6 @@ build/
 
 # Sensitive config
 src/main/resources/application.properties
+
+# 🔥 Google service account key (sensitive)
+src/main/resources/serviceAccountKey.json
