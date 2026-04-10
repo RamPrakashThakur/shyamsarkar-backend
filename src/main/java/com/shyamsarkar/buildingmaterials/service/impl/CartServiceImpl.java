@@ -40,8 +40,8 @@ public class CartServiceImpl implements CartService {
     private final OrderRepository orderRepository;
     private final GoogleMapsService googleMapsService;
 
-    @Value("${warehouse.lat}")
-    private double WAREHOUSE_LAT;
+    
+    private double WAREHOUSE_LAT=24.491042;
 
     @Value("${warehouse.lng}")
     private double WAREHOUSE_LNG;
