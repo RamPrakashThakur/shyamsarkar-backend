@@ -1,22 +1,22 @@
-# Use working JDK 17 image
-FROM eclipse-temurin:17-jdk-focal
+# ---------- BUILD STAGE ----------
+FROM maven:3.9.9-eclipse-temurin-17 AS build
 
-# Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper and pom
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
+# Copy everything
+COPY . .
 
-# Copy source code
-COPY src ./src
+# Clean build (force fresh dependencies)
+RUN mvn clean package -DskipTests
 
-# Build the JAR inside container
-RUN ./mvnw clean package -DskipTests
+# ---------- RUN STAGE ----------
+FROM eclipse-temurin:17-jdk-jammy
 
-# Expose port
+WORKDIR /app
+
+# Copy jar from build stage
+COPY --from=build /app/target/*.jar app.jar
+
 EXPOSE 8080
 
-# Run the JAR with exact name
-ENTRYPOINT ["java", "-jar", "target/BuildingMaterials-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
