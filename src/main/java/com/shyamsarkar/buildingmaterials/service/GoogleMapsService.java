@@ -17,8 +17,15 @@ import jakarta.annotation.PostConstruct;
 @Service
 public class GoogleMapsService {
 
-    @Value("${google.maps.api-key}")
-    private String apiKey;
+    private final String apiKey;
+
+    public GoogleMapsService() {
+        this.apiKey = System.getenv("GOOGLE_API_KEY");
+
+        if (apiKey == null || apiKey.isBlank()) {
+            throw new RuntimeException("GOOGLE_API_KEY not found");
+        }
+    }
 
     @PostConstruct
     public void debugEnv() {
