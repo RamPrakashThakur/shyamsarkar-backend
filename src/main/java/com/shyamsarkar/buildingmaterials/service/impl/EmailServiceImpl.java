@@ -14,9 +14,7 @@ public class EmailServiceImpl implements EmailService {
     @Autowired(required = false)
     private  JavaMailSender mailSender;
 
-    public EmailServiceImpl(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+    
 
     public void sendResetToken(String to, String token) {
 
