@@ -12,11 +12,20 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.shyamsarkar.buildingmaterials.dto.DistanceResult;
 import com.shyamsarkar.buildingmaterials.exception.BadRequestException;
 
+import jakarta.annotation.PostConstruct;
+
 @Service
 public class GoogleMapsService {
 
     @Value("${google.maps.api-key}")
     private String apiKey;
+
+    @PostConstruct
+    public void debugEnv() {
+        System.out.println("MAIL_USERNAME=" + System.getenv("MAIL_USERNAME"));
+        System.out.println("MAIL_PASSWORD=" + System.getenv("MAIL_PASSWORD"));
+        System.out.println("GOOGLE_API_KEY=" + System.getenv("GOOGLE_API_KEY"));
+    }
 
     private final RestTemplate restTemplate = new RestTemplate();
 
