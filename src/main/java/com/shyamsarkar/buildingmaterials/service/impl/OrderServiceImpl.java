@@ -50,11 +50,11 @@ public class OrderServiceImpl implements OrderService {
     private static final Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
 
 
-    @Value("${warehouse.lat}")
-    private double warehouseLat;
+    
+    private double warehouseLat=24.491042;
 
-    @Value("${warehouse.lng}")
-    private double warehouseLng;
+    
+    private double warehouseLng=74.876516;
     
 
     // ================= CREATE ORDER =================
